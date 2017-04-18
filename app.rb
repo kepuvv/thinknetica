@@ -7,17 +7,15 @@ month = gets.strip.to_i
 print 'Enter year: '
 year = gets.strip.to_i
 
-hh = 	{ 
-		01 => 31, 
-		02 => [28, 29], 
-		03 => 31,
-		04 => 30, 
-		05 => 31, 
-		06 => 30, 
-		07 => 31, 
-		08 => 31, 
-		09 => 30, 
-		10 => 31, 
-		11 => 30, 
-		12 => 31 
-		}
+days_in_m = [ 31, [28, 29], 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 ]
+
+def is_year_leap? year
+	 year % 4 == 0 || year % 400 == 0
+end
+
+if is_year_leap? year
+	puts "Високосный" 
+else 
+	puts "Не Високосный"
+end
+
