@@ -18,4 +18,11 @@ loop do
 	hh[title][price] = quantity
 end
 
-hh.each { |x| puts x }
+hh.each do |key, hash| 
+	#puts "#{key} : #{hash}"
+		hash.each do |price, q|
+			puts "#{key} : цена за штуку: #{price}, кол-во: #{q}"
+			puts "Total price for #{key} = #{price * q}"
+		end	
+end
+
