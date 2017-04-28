@@ -43,8 +43,8 @@ class Train
 # не робит гет роут
 	def get_route(route_name)
 		@route = route_name
-		@current_station = @route.key[1]
-		next_prev
+		@current_station = @route.key(1).name
+		#next_prev
 	end
 
 	def go_to(station)
@@ -52,21 +52,22 @@ class Train
 		next_prev
 	end
 
-	def next_prev
-		if self.route[@current_station] == 1	
-			@next = @route.key[@route[current_station] + 1]
-		elsif self.route[@current_station] == @route.size
-			@previous = @route.key[@route[current_station] - 1]
-		else
-			@next = @route.key[@route[current_station] + 1]
-			@previous = @route.key[@route[current_station] - 1]
-		end
-	end
+	# def next_prev
+	# 	if self.route[@current_station] == 1	
+	# 		@next = @route.key[@route[current_station] + 1]
+	# 	elsif self.route[@current_station] == @route.size
+	# 		@previous = @route.key[@route[current_station] - 1]
+	# 	else
+	# 		@next = @route.key[@route[current_station] + 1]
+	# 		@previous = @route.key[@route[current_station] - 1]
+	# 	end
+	# end
 end
 
 class RailwayStation
 
 	attr_reader :trains
+	attr_reader :name
 
 	def initialize(name)
 		@name = name
