@@ -5,12 +5,13 @@ class Train
 	attr_accessor :num_carriage
 	attr_accessor :speed
 	attr_accessor :current_station
-
+	attr_accessor :next
+	attr_accessor :previous
 
 	attr_reader :route
 
 	def initialize(num_carriage = 0, type_id)
-		
+		@speed = 0
 		types = ['cargo', 'passenger']
 		@type = types[type_id]
 		@num_carriage = num_carriage
@@ -33,22 +34,30 @@ class Train
 	end
 	
 	def del_carriage
-		self.speed == 0 ? self.num_carriage -=1 : puts 'Stop for this action'
+		self.speed == 0 ? self.num_carriage -=1 : puts "Stop for this action"
 	end
 
 	def get_route(route)
 		@route = route
 		@current_station = @route.key[1]
+		next_prev
 	end
 # закончил где-то тут
 	def go_to(station)
-		self.route[station]
+		self.current_station = station
+		next_prev
 	end
 
-	def current_station
-
-
-
+	def next_prev
+		if self.route[@current_station] == 1	
+			@next = @route.key[@route[current_station] + 1]
+		elsif self.route[@current_station] == @route.size
+			@previous = @route.key[@route[current_station] - 1]
+		else
+			@next = @route.key[@route[current_station] + 1]
+			@previous = @route.key[@route[current_station] - 1]
+		end
+	end
 end
 
 class RailwayStation
