@@ -2,6 +2,42 @@
 
 class Train
 
+	attr_accessor :num_carriage
+	attr_accessor :speed
+
+	attr_reader :route
+
+	def initialize(num_carriage = 0, type_id)
+		types = ['cargo', 'passenger']
+		@type = types[type_id]
+		@num_carriage = num_carriage
+	end
+
+	def go(speed)
+		self.speed = speed
+	end
+
+	def stop
+		self.speed = 0
+	end
+
+	def add_carriage
+		if self.speed == 0
+			@num_carriage +=1
+		else 
+			puts 'Stop for this action'
+		end
+	end
+	
+	def del_carriage
+		self.speed == 0 ? @num_carriage -=1 : puts 'Stop for this action'
+	end
+
+	def get_route(route)
+		@route = route
+	end
+
+
 end
 
 class RailwayStation
@@ -23,28 +59,29 @@ end
 
 class Route
 
-	attr_reader :stations
+	attr_reader :route
+	attr_reader :name
 
 	# станции в хэше
-	def initialize(start_station, end_station)
-		
-		@stations = {}
-		@stations[start_station] = 1
-		@stations[end_station] = 1000
+	def initialize(name, start_station, end_station)
+		@name = name
+		@route = {}
+		@route[start_station] = 1
+		@route[end_station] = @route.size + 1
 	end
 
 	def add_station(station_name, position)
-		@stations[station_name] = position
-		
+		@route[station_name] = position
+		@route[end_station] = @route.size + 1		
 	end
 
 	def del_station(station_name)
-		@stations.delete(station_name)
-		
+		@route.delete(station_name)
+		@route[end_station] = @route.size + 1		
 	end
 
 	def show_route
-		(@stations.sort_by { |_,value| value }).each do |arr|
+		(@route.sort_by { |_,value| value }).each do |arr|
 			puts arr[1]
 		end
 	end
