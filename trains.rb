@@ -34,15 +34,19 @@ class Train
 	end
 	
 	def del_carriage
-		self.speed == 0 ? self.num_carriage -=1 : puts "Stop for this action"
+		if self.speed == 0 
+			self.num_carriage -=1
+		else
+		 	puts "Stop for this action"
+		end
 	end
-
-	def get_route(route)
-		@route = route
+# не робит гет роут
+	def get_route(route_name)
+		@route = route_name
 		@current_station = @route.key[1]
 		next_prev
 	end
-# закончил где-то тут
+
 	def go_to(station)
 		self.current_station = station
 		next_prev
@@ -75,6 +79,7 @@ class RailwayStation
 
 	def send_train(train)
 		@trains.delete(train)
+	end
 end
 
 class Route
@@ -86,23 +91,24 @@ class Route
 	def initialize(name, start_station, end_station)
 		@name = name
 		@route = {}
+		@end_station = end_station
 		@route[start_station] = 1
-		@route[end_station] = @route.size + 1
+		@route[end_station] = @route.size
 	end
 
 	def add_station(station_name, position)
 		@route[station_name] = position
-		@route[end_station] = @route.size + 1		
+		@route[@end_station] = @route.size		
 	end
 
 	def del_station(station_name)
 		@route.delete(station_name)
-		@route[end_station] = @route.size + 1		
+		@route[@end_station] = @route.size		
 	end
 
 	def show_route
 		(@route.sort_by { |_,value| value }).each do |arr|
-			puts arr[1]
+			puts arr[0]
 		end
 	end
 
