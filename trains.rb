@@ -25,16 +25,28 @@ class Route
 
 	attr_reader :stations
 
-	# над как-то придумать,чтобы станция оставалась последней
+	# станции в хэше
 	def initialize(start_station, end_station)
-		@start_station = start_station
-		@end_station = end_station
-		@stations = []
-		@stations[0] = @start_station
-		@stations[-1] = @end_station
+		
+		@stations = {}
+		@stations[start_station] = 1
+		@stations[end_station] = 1000
 	end
 
-	def add_station(station, position)
-		@stations[position] = station
+	def add_station(station_name, position)
+		@stations[station_name] = position
+		
 	end
+
+	def del_station(station_name)
+		@stations.delete(station_name)
+		
+	end
+
+	def show_route
+		(@stations.sort_by { |_,value| value }).each do |arr|
+			puts arr[1]
+		end
+	end
+
 end
