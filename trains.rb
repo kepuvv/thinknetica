@@ -4,10 +4,13 @@ class Train
 
 	attr_accessor :num_carriage
 	attr_accessor :speed
+	attr_accessor :current_station
+
 
 	attr_reader :route
 
 	def initialize(num_carriage = 0, type_id)
+		
 		types = ['cargo', 'passenger']
 		@type = types[type_id]
 		@num_carriage = num_carriage
@@ -23,19 +26,27 @@ class Train
 
 	def add_carriage
 		if self.speed == 0
-			@num_carriage +=1
+			self.num_carriage +=1
 		else 
 			puts 'Stop for this action'
 		end
 	end
 	
 	def del_carriage
-		self.speed == 0 ? @num_carriage -=1 : puts 'Stop for this action'
+		self.speed == 0 ? self.num_carriage -=1 : puts 'Stop for this action'
 	end
 
 	def get_route(route)
 		@route = route
+		@current_station = @route.key[1]
 	end
+# закончил где-то тут
+	def go_to(station)
+		self.route[station]
+	end
+
+	def current_station
+
 
 
 end
