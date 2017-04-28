@@ -49,7 +49,7 @@ class Train
 
 	def go_to(station)
 		self.current_station = station
-		next_prev
+		#next_prev
 	end
 
 	# def next_prev
