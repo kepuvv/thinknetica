@@ -45,25 +45,29 @@ class Train
 # получает объект Route и хэш со станциями в этом объекте
 	def get_route(route_name)
 		@route = route_name.route
-		@current_station = @route.key(1).name
-		#next_prev
+		@current_station = @route.key(1)
+		puts "Поезд следует по маршруту #{route_name.name}"
+		next_prev
 	end
 
 	def go_to(station)
 		self.current_station = station
-		#next_prev
+		next_prev
 	end
 
-	# def next_prev
-	# 	if self.route[@current_station] == 1	
-	# 		@next = @route.key[@route[current_station] + 1]
-	# 	elsif self.route[@current_station] == @route.size
-	# 		@previous = @route.key[@route[current_station] - 1]
-	# 	else
-	# 		@next = @route.key[@route[current_station] + 1]
-	# 		@previous = @route.key[@route[current_station] - 1]
-	# 	end
-	# end
+	 def next_prev
+	 	if self.route[@current_station] == 1	
+	 		@next = @route.key(@route[current_station] + 1).name
+	 		return puts "Следующая станция #{@next}"
+	 	elsif self.route[@current_station] == @route.size
+	 		@previous = @route.key(@route[current_station] - 1).name
+	 		return puts "Следующая станция #{@next}"
+	 	else
+	 		@next = @route.key(@route[current_station] + 1).name
+	 		@previous = @route.key(@route[current_station] - 1).name
+	 		return puts "Следующая станция #{@next}, предыдущая #{@previous}"
+	 	end
+	 end
 end
 
 class RailwayStation
