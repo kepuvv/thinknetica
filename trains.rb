@@ -19,17 +19,19 @@ class Train
 
 	def go(speed)
 		self.speed = speed
+		puts "Текущая скорость поезда #{self.speed}."
 	end
 
 	def stop
 		self.speed = 0
+		puts "Поезд остановлен."
 	end
 
 	def add_carriage
 		if self.speed == 0
 			self.num_carriage +=1
 		else 
-			puts 'Stop for this action'
+			puts 'Остановите Поезд для добавления вагона.'
 		end
 	end
 	
@@ -37,12 +39,12 @@ class Train
 		if self.speed == 0 
 			self.num_carriage -=1
 		else
-		 	puts "Stop for this action"
+		 	puts "Остановите поезд."
 		end
 	end
-# не робит гет роут
+# получает объект Route и хэш со станциями в этом объекте
 	def get_route(route_name)
-		@route = route_name
+		@route = route_name.route
 		@current_station = @route.key(1).name
 		#next_prev
 	end
@@ -107,9 +109,11 @@ class Route
 		@route[@end_station] = @route.size		
 	end
 
-	def show_route
-		(@route.sort_by { |_,value| value }).each do |arr|
-			puts arr[0]
+# тображает станции в маршруте оп порядку.
+	def list
+		# сортирует хэш по значениям, переводит в массив, элементами массива являются объекты станции
+		(@route.sort_by { |_,value| value }).each_with_index do |arr,i|
+			puts "#{i+1} - #{arr[0].name}"
 		end
 	end
 
