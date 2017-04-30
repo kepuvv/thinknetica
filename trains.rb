@@ -52,6 +52,7 @@ class Train
 
 	def go_to(station)
 		self.current_station = station
+		puts "Поезд следует на станцию #{@current_station.name}"
 		next_prev
 	end
 
