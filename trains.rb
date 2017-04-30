@@ -46,6 +46,8 @@ class Train
 	def get_route(route_name)
 		@route = route_name.route
 		@current_station = @route.key(1)
+		# хз как сделать добавление поезда на станцию.
+		#@current_station.arrive_train 
 		puts "Поезд следует по маршруту #{route_name.name}"
 		next_prev
 	end
